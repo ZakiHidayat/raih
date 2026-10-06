@@ -46,10 +46,16 @@ const organizerPages = [
 export default function NotionOrganizerLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, logout } = useAuthStore();
+  const { user, logout, isAuthenticated, _hasHydrated } = useAuthStore();
   const orgProfile = user?.organizer_profile;
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  React.useEffect(() => {
+    if (_hasHydrated && (!isAuthenticated || !user)) {
+      router.replace('/auth/login');
+    }
+  }, [_hasHydrated, isAuthenticated, user, router]);
 
   const getPageTitle = () => {
     if (pathname.startsWith('/dashboard')) return 'Dashboard Pengelola';

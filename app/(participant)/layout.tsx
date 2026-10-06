@@ -114,10 +114,16 @@ const initialNotifications: DeadlineNotification[] = [
 export default function NotionParticipantLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, logout } = useAuthStore();
+  const { user, logout, isAuthenticated, _hasHydrated } = useAuthStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+
+  React.useEffect(() => {
+    if (_hasHydrated && (!isAuthenticated || !user)) {
+      router.replace('/auth/login');
+    }
+  }, [_hasHydrated, isAuthenticated, user, router]);
   const [notifications, setNotifications] = useState<DeadlineNotification[]>(initialNotifications);
   const [notifFilter, setNotifFilter] = useState<'all' | 'deadline'>('all');
 

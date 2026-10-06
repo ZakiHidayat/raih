@@ -72,13 +72,25 @@ const rolePortals: RolePortalConfig[] = [
 
 export default function NotionLoginPage() {
   const router = useRouter();
-  const { login, isLoading } = useAuthStore();
+  const { login, isLoading, user, isAuthenticated, _hasHydrated } = useAuthStore();
 
   const [activeRole, setActiveRole] = useState<PortalRole>('participant');
   const [email, setEmail] = useState('ariel@example.com');
   const [password, setPassword] = useState('password');
   const [showPass, setShowPass] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+
+  React.useEffect(() => {
+    if (_hasHydrated && isAuthenticated && user) {
+      if (user.role === 'admin') {
+        router.replace('/admin');
+      } else if (user.role === 'organizer') {
+        router.replace('/dashboard');
+      } else {
+        router.replace('/home');
+      }
+    }
+  }, [_hasHydrated, isAuthenticated, user, router]);
 
   const currentPortal = rolePortals.find((p) => p.id === activeRole) || rolePortals[0];
 

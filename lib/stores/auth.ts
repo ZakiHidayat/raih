@@ -11,6 +11,8 @@ interface AuthState {
   user: AuthUser | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  _hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 
   // Actions
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
@@ -69,9 +71,11 @@ const defaultUser: AuthUser = {
 export const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
-      user: defaultUser,
+      user: null,
       isLoading: false,
-      isAuthenticated: true,
+      isAuthenticated: false,
+      _hasHydrated: false,
+      setHasHydrated: (val) => set({ _hasHydrated: val }),
 
       login: async (email, password) => {
         set({ isLoading: true });
@@ -195,6 +199,9 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'raih-auth-session',
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
     }
   )
 );

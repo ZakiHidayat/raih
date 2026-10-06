@@ -33,9 +33,15 @@ const adminNavItems = [
 export default function NotionAdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, logout } = useAuthStore();
+  const { user, logout, isAuthenticated, _hasHydrated } = useAuthStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  React.useEffect(() => {
+    if (_hasHydrated && (!isAuthenticated || !user)) {
+      router.replace('/auth/login');
+    }
+  }, [_hasHydrated, isAuthenticated, user, router]);
 
   return (
     <div className="min-h-screen flex bg-[#F6F5F4] text-[#000000] font-sans antialiased">
