@@ -1,5 +1,5 @@
 {
-  "name": "raih-nextjs",
+  "name": "raih",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,9 +9,18 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@heroui/react": "^2.8.10",
+    "@internationalized/date": "^3.12.4",
+    "@react-aria/ssr": "^3.10.1",
+    "@react-aria/utils": "^3.34.1",
+    "framer-motion": "^13.4.4",
+    "lucide-react": "^1.48.0",
     "next": "16.3.6",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-aria": "^3.52.1",
+    "react-aria-components": "^1.21.1",
+    "react-dom": "19.2.8",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

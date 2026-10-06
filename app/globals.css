@@ -1,26 +1,343 @@
+/* ============================================================
+   RAIH — Global Styles
+   Design System: Notion (warm paper-calm productivity aesthetic)
+   Reference: design.md
+   ============================================================ */
+
 @import "tailwindcss";
+@plugin "../heroui-plugin.js";
+@source "../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   Design Tokens & CSS Variables (Notion Design Language)
+   ============================================================ */
+
+:root,
+:host {
+  /* Geometry Tokens */
+  --radius-xs: 4px;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  --radius: 12px;           /* default card radius */
+  --field-radius: 4px;      /* notion inputs use 4px */
+
+  /* Base Canvas & Surfaces */
+  --canvas: #FFFFFF;
+  --canvas-soft: #F6F5F4;    /* warm paper-calm signature canvas */
+  --background: #F6F5F4;
+  --surface: #FFFFFF;
+  --surface-soft: #F6F5F4;
+  --surface-strong: #ECEBE8;
+  --surface-card: #FFFFFF;
+  --surface-dark: #213183;   /* deep indigo hero band */
+  --surface-dark-elevated: #2D3E9E;
+
+  /* Typography Colors */
+  --ink: #000000;
+  --ink-secondary: #31302E;  /* warm charcoal */
+  --ink-muted: #615D59;      /* stone supporting */
+  --ink-faint: #A39E98;      /* ash captions & metadata */
+  --foreground: #000000;
+  --body: #31302E;
+  --body-strong: #000000;
+  --muted: #615D59;
+  --muted-soft: #A39E98;
+
+  /* Structural Brand Primary (Notion Blue #0075DE) */
+  --primary: #0075DE;
+  --primary-active: #005BAB;
+  --primary-disabled: #B3D8FA;
+  --primary-soft: #EBF4FC;
+  --on-primary: #FFFFFF;
+  --secondary: #213183;      /* deep indigo night hero band */
+  --accent: #0075DE;
+  --accent-hover: #005BAB;
+  --accent-foreground: #FFFFFF;
+
+  /* Notion Decorative Sticker Palette */
+  --accent-sky: #62AEF0;
+  --accent-purple: #D6B6F6;
+  --accent-purple-deep: #391C57;
+  --accent-pink: #FF64C8;
+  --accent-orange: #DD5B00;
+  --accent-orange-deep: #793400;
+  --accent-teal: #2A9D99;
+  --accent-green: #1AAE39;
+  --accent-brown: #523410;
+
+  /* Hairlines & Borders */
+  --border: #E6E6E6;
+  --hairline: #E6E6E6;
+  --hairline-soft: #EFEFEF;
+  --separator: #E6E6E6;
+  --focus: #0075DE;
+
+  /* Status Semantics (Mapped to Sticker Palette) */
+  --success: #1AAE39;
+  --danger: #DD5B00;
+  --warning: #DD5B00;
+  --info: #0075DE;
+
+  /* Text on Dark Hero */
+  --on-dark: #FFFFFF;
+  --on-dark-soft: #D1D5DB;
+
+  /* Notion Subtle Layered Shadows */
+  --surface-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.02);
+  --overlay-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
+.dark,
+[data-theme="dark"] {
+  --canvas: #191919;
+  --canvas-soft: #202020;
+  --background: #191919;
+  --surface: #202020;
+  --surface-soft: #252525;
+  --surface-strong: #2F2F2F;
+  --surface-card: #202020;
+  --ink: #FFFFFF;
+  --ink-secondary: #E3E2E0;
+  --ink-muted: #9B9A97;
+  --ink-faint: #5A5A58;
+  --foreground: #FFFFFF;
+  --body: #E3E2E0;
+  --border: #2F2F2F;
+  --hairline: #2F2F2F;
+  --hairline-soft: #282828;
+}
+
+/* ============================================================
+   Tailwind Token Extensions
+   ============================================================ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: #0075DE;
+  --color-primary-active: #005BAB;
+  --color-primary-disabled: #B3D8FA;
+  --color-primary-soft: #EBF4FC;
+  --color-secondary: #213183;
+  --color-ink: #000000;
+  --color-ink-secondary: #31302E;
+  --color-ink-muted: #615D59;
+  --color-ink-faint: #A39E98;
+  --color-body: #31302E;
+  --color-muted: #615D59;
+  --color-hairline: #E6E6E6;
+  --color-hairline-soft: #EFEFEF;
+  --color-canvas-soft: #F6F5F4;
+  --color-surface-soft: #F6F5F4;
+  --color-surface-strong: #ECEBE8;
+  --color-surface-dark: #213183;
+  --color-surface-dark-elevated: #2D3E9E;
+
+  /* Notion Sticker Palette */
+  --color-accent-sky: #62AEF0;
+  --color-accent-purple: #D6B6F6;
+  --color-accent-purple-deep: #391C57;
+  --color-accent-pink: #FF64C8;
+  --color-accent-orange: #DD5B00;
+  --color-accent-orange-deep: #793400;
+  --color-accent-teal: #2A9D99;
+  --color-accent-green: #1AAE39;
+  --color-accent-brown: #523410;
+
+  /* Brand Scale mapped to Notion Blue */
+  --color-brand-50: #EBF4FC;
+  --color-brand-100: #D0E5F9;
+  --color-brand-200: #B3D8FA;
+  --color-brand-500: #0075DE;
+  --color-brand-600: #005BAB;
+
+  --font-sans: var(--font-geist-sans), Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================================
+   Global Base Styles
+   ============================================================ */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    background-color: var(--canvas-soft);
+    color: var(--ink);
+  }
+
+  body {
+    background-color: var(--canvas-soft);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+  }
+
+  /* Notion Typography Hierarchy */
+  h1 {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+  h2 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  h3 {
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  /* Tabular figures for numbers & stats */
+  .tabular-nums {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   Notion Component Utilities
+   ============================================================ */
+@layer utilities {
+  /* Notion Primary CTA: Pill-shaped Notion Blue */
+  .btn-primary {
+    background-color: #0075DE;
+    color: #FFFFFF;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 10px 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 140ms ease;
+  }
+  .btn-primary:hover {
+    background-color: #005BAB;
+  }
+
+  /* Notion Secondary Button: Pill-shaped White with hairline border */
+  .btn-secondary {
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #E6E6E6;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 10px 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 140ms ease;
+  }
+  .btn-secondary:hover {
+    background-color: #F6F5F4;
+    border-color: #D1D5DB;
+  }
+
+  /* Notion Utility Button: 8px rounded */
+  .btn-utility {
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #E6E6E6;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 6px 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 140ms ease;
+  }
+  .btn-utility:hover {
+    background-color: #F6F5F4;
+  }
+
+  /* Notion Outline Button */
+  .btn-outline {
+    background-color: transparent;
+    border: 1px solid #E6E6E6;
+    color: #000000;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 9px 19px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 140ms ease;
+  }
+  .btn-outline:hover {
+    background-color: #FFFFFF;
+    border-color: #B3D8FA;
+  }
+
+  /* Notion Search Pill / Field */
+  .search-pill {
+    background-color: #FFFFFF;
+    border: 1px solid #E6E6E6;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    color: #000000;
+    transition: all 140ms ease;
+  }
+  .search-pill:focus-within {
+    border-color: #0075DE;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 1px #0075DE;
+  }
+
+  /* Notion Badge Pill */
+  .badge-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: #FFFFFF;
+    border: 1px solid #E6E6E6;
+    color: #0075DE;
+  }
+
+  /* Notion Feature Card: 12px rounded, 1px hairline, subtle shadow */
+  .card-institutional,
+  .notion-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E6E6E6;
+    border-radius: 12px;
+    transition: all 160ms ease;
+  }
+  .card-institutional:hover,
+  .notion-card:hover {
+    border-color: #D1D5DB;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Notion Night Hero Band: Deep Indigo #213183 */
+  .hero-dark {
+    background-color: #213183;
+    color: #FFFFFF;
+  }
+
+  /* Solid Brand Classes (Zero loud gradients per Notion spec) */
+  .gradient-brand {
+    background-color: #0075DE !important;
+    background-image: none !important;
+  }
+
+  .gradient-hero {
+    background-color: #213183 !important;
+    background-image: none !important;
+  }
+
+  .text-gradient-brand {
+    color: #0075DE !important;
+    background: none !important;
+    -webkit-text-fill-color: #0075DE !important;
+  }
 }
