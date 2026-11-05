@@ -42,6 +42,7 @@ import { competitionRepo, savedCompRepo, registrationRepo } from '@/lib/reposito
 import { useAuthStore } from '@/lib/stores/auth';
 import type { Competition, RegistrationWithDetails } from '@/types';
 import { mockCategories } from '@/data/mock';
+import { getPrizeSummary } from '@/lib/utils/prize';
 
 // Notion Sticker Accent Badge Colors (from design.md)
 const stickerColors: Record<number, { bg: string; text: string; border: string }> = {
@@ -638,13 +639,13 @@ export default function NotionHomePage() {
 
                   {/* Notion-style Metadata Rows */}
                   <div className="space-y-1.5 pt-2 border-t border-[#E6E6E6]/60 text-xs text-[#615D59]">
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1.5 text-[11px]">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="inline-flex items-center gap-1.5 text-[11px] flex-shrink-0">
                         <DollarSign size={13} className="text-[#1AAE39]" />
                         <span>Hadiah:</span>
                       </span>
-                      <span className="font-semibold text-[#000000]">
-                        {comp.prize_info ? comp.prize_info : 'Sertifikat'}
+                      <span className="font-semibold text-[#000000] text-right truncate text-[11px]">
+                        {getPrizeSummary(comp.prize_info).shortLabel}
                       </span>
                     </div>
 
@@ -724,8 +725,8 @@ export default function NotionHomePage() {
                         `Rp ${comp.registration_fee.toLocaleString('id-ID')}`
                       )}
                     </td>
-                    <td className="py-3 px-3 font-semibold text-[#000000] whitespace-nowrap">
-                      {comp.prize_info ? comp.prize_info : '-'}
+                    <td className="py-3 px-3 font-semibold text-[#000000] whitespace-nowrap text-xs">
+                      {comp.prize_info ? getPrizeSummary(comp.prize_info).shortLabel : '-'}
                     </td>
                     <td className="py-3 px-3 capitalize text-[#615D59]">
                       {comp.comp_type === 'team' ? 'Tim' : 'Individu'}

@@ -30,6 +30,7 @@ import { competitionRepo, searchHistoryRepo } from '@/lib/repositories/local';
 import { useAuthStore } from '@/lib/stores/auth';
 import { mockCategories } from '@/data/mock';
 import type { Competition, CompetitionFilters } from '@/lib/repositories/interfaces';
+import { getPrizeSummary } from '@/lib/utils/prize';
 
 function formatDeadline(dateStr: string) {
   const days = Math.ceil((new Date(dateStr).getTime() - Date.now()) / 86400000);
@@ -303,8 +304,8 @@ export default function NotionSearchPage() {
                 <div className="flex items-center justify-between sm:justify-end gap-4 pt-2 sm:pt-0 border-t sm:border-t-0 border-[#E6E6E6]/60 text-xs">
                   <div className="text-left sm:text-right">
                     <p className="text-[11px] text-[#615D59]">Hadiah</p>
-                    <p className="font-semibold text-[#000000]">
-                      {comp.prize_info ? comp.prize_info : 'Sertifikat'}
+                    <p className="font-semibold text-[#000000] text-xs">
+                      {comp.prize_info ? getPrizeSummary(comp.prize_info).shortLabel : 'Sertifikat'}
                     </p>
                   </div>
                   <button className="px-4 py-1.5 rounded-full bg-[#0075DE] hover:bg-[#005BAB] text-white text-xs font-medium">

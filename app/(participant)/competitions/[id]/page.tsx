@@ -41,6 +41,8 @@ import { competitionRepo, savedCompRepo, reviewRepo } from '@/lib/repositories/l
 import { useAuthStore } from '@/lib/stores/auth';
 import type { CompetitionWithDetails, Review } from '@/types';
 import { CompetitionTimeline } from '@/components/features/competitions/CompetitionTimeline';
+import { getPrizeSummary } from '@/lib/utils/prize';
+import PrizeStructureView from '@/components/features/competitions/PrizeStructureView';
 
 function formatDate(dateStr: string | null) {
   if (!dateStr) return '-';
@@ -285,8 +287,8 @@ export default function NotionCompetitionDetailPage() {
               <span className="text-[#615D59] block mb-1 flex items-center gap-1.5 text-[11px]">
                 <Trophy size={13} className="text-[#DD5B00]" /> Total Hadiah
               </span>
-              <span className="font-semibold text-[#000000]">
-                {comp.prize_info ? comp.prize_info : 'Sertifikat & Hadiah'}
+              <span className="font-semibold text-[#000000] truncate block">
+                {comp.prize_info ? getPrizeSummary(comp.prize_info).primaryAmount : 'Sertifikat & Hadiah'}
               </span>
             </div>
 
@@ -338,6 +340,21 @@ export default function NotionCompetitionDetailPage() {
           <div className="text-xs text-[#31302E] leading-relaxed whitespace-pre-line space-y-2">
             {comp.description}
           </div>
+        </section>
+
+        {/* Section: Struktur Hadiah & Penghargaan */}
+        <section className="bg-white rounded-xl border border-[#E6E6E6] p-6 shadow-2xs">
+          <div className="mb-4">
+            <h2 className="text-base font-bold text-[#000000] flex items-center gap-2">
+              <Trophy size={17} className="text-[#DD5B00]" />
+              <span>Struktur Hadiah & Penghargaan</span>
+            </h2>
+            <p className="text-xs text-[#615D59] mt-0.5">
+              Rincian reward, apresiasi tunai, sertifikat resmi, dan benefit lainnya untuk para pemenang kompetisi.
+            </p>
+          </div>
+
+          <PrizeStructureView prizeInfo={comp.prize_info} />
         </section>
 
         {/* Section: Timeline & Alur Acara */}

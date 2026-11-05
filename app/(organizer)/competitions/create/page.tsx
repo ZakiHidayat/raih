@@ -18,6 +18,9 @@ import { competitionRepo } from '@/lib/repositories/local';
 import { useAuthStore } from '@/lib/stores/auth';
 import { mockCategories } from '@/data/mock';
 import type { CompType, TimelineStatus, CompetitionFormSettings, CustomFormField } from '@/types';
+import OrganizerPrizeBuilder from '@/components/features/competitions/OrganizerPrizeBuilder';
+import PrizeStructureView from '@/components/features/competitions/PrizeStructureView';
+import { getPrizeSummary } from '@/lib/utils/prize';
 
 const steps = [
   { id: 1, label: 'Info Dasar', icon: FileText, iconFill: FileTextFill },
@@ -484,7 +487,7 @@ export default function CreateCompetitionPage() {
                 </RadioGroup>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-4">
                 <Input
                   id="create-fee"
                   label="Biaya Pendaftaran (Rp)"
@@ -496,14 +499,14 @@ export default function CreateCompetitionPage() {
                   classNames={{ inputWrapper: 'rounded-[4px] h-10 border-[#E6E6E6]' }}
                   description="Biaya admin Rp 5.000 akan ditambahkan"
                 />
-                <Input
-                  id="create-prize"
-                  label="Info Hadiah (opsional)"
-                  placeholder="e.g. Juara 1: Rp 10.000.000"
-                  value={form.prize_info}
-                  onValueChange={v => update('prize_info', v)}
-                  classNames={{ inputWrapper: 'rounded-[4px] h-10 border-[#E6E6E6]' }}
-                />
+
+                {/* Organizer Prize Builder (Input Satu per Satu) */}
+                <div className="pt-2 border-t border-[#E6E6E6]">
+                  <OrganizerPrizeBuilder
+                    value={form.prize_info}
+                    onChange={(v) => update('prize_info', v)}
+                  />
+                </div>
               </div>
             </div>
           )}
@@ -1257,7 +1260,7 @@ export default function CreateCompetitionPage() {
                     </div>
                     <div className="sm:col-span-2 mt-1 sm:mt-0 flex items-center sm:justify-end">
                       <span className="font-bold text-[#DD5B00] bg-[#FDF5E8] border border-[#DD5B00]/30 px-2.5 py-0.5 rounded-[4px]">
-                        {form.prize_info ? (!isNaN(Number(form.prize_info)) ? `Rp ${Number(form.prize_info).toLocaleString('id-ID')}` : form.prize_info) : 'Sertifikat & Penghargaan'}
+                        {getPrizeSummary(form.prize_info).shortLabel}
                       </span>
                     </div>
                   </div>
@@ -1274,6 +1277,18 @@ export default function CreateCompetitionPage() {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              {/* Preview Rincian Hadiah */}
+              <div className="bg-white border border-[#E6E6E6] rounded-lg p-4 space-y-3 shadow-2xs">
+                <div className="flex items-center justify-between pb-2 border-b border-[#E6E6E6]">
+                  <h3 className="text-xs font-bold text-[#000000] flex items-center gap-1.5 uppercase tracking-wider">
+                    <Trophy size={14} className="text-[#DD5B00]" />
+                    Pratinjau Struktur Hadiah
+                  </h3>
+                  <span className="text-[10px] text-[#9B9A97]">Tampilan di Halaman Peserta</span>
+                </div>
+                <PrizeStructureView prizeInfo={form.prize_info} compact />
               </div>
 
               {/* Settingan Form Peserta Card */}
