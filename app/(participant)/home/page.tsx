@@ -705,8 +705,15 @@ export default function NotionHomePage() {
                     onClick={() => router.push(`/competitions/${comp.id}`)}
                     className="hover:bg-[#F6F5F4]/70 cursor-pointer transition-colors"
                   >
-                    <td className="py-3 px-3 font-semibold text-[#000000] max-w-xs truncate">
-                      {comp.title}
+                    <td className="py-3 px-3 font-semibold text-[#000000] max-w-xs">
+                      <div className="flex items-center gap-2.5">
+                        {comp.logo_image ? (
+                          <div className="w-6 h-6 rounded-md border border-[#E6E6E6] bg-white overflow-hidden shrink-0 flex items-center justify-center">
+                            <img src={comp.logo_image} alt="" className="w-full h-full object-contain p-0.5" />
+                          </div>
+                        ) : null}
+                        <span className="truncate">{comp.title}</span>
+                      </div>
                     </td>
                     <td className="py-3 px-3">
                       <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${sticker.bg} ${sticker.text} ${sticker.border}`}>

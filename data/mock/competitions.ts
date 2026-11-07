@@ -23,7 +23,8 @@ export const mockCompetitions: Competition[] = [
     end_date: daysFromNow(23),
     status: 'published',
     is_featured: true,
-    banner_image: null,
+    banner_image: '/coverbanner/himsi-hackathon.jpg',
+    logo_image: '/logo/himsi-hackathon-logo.jpeg',
     created_at: daysAgo(30),
   },
   {
@@ -40,7 +41,8 @@ export const mockCompetitions: Competition[] = [
     end_date: daysFromNow(75),
     status: 'published',
     is_featured: true,
-    banner_image: null,
+    banner_image: '/coverbanner/karya-tulis-kemendikbud-banner.jpeg',
+    logo_image: '/logo/karya-tulis-kemendikbud-logo.jpeg',
     created_at: daysAgo(15),
   },
   {
@@ -57,7 +59,8 @@ export const mockCompetitions: Competition[] = [
     end_date: daysFromNow(50),
     status: 'published',
     is_featured: true,
-    banner_image: null,
+    banner_image: '/coverbanner/astra-banner.jpeg',
+    logo_image: '/logo/astra-logo.jpeg',
     created_at: daysAgo(20),
   },
   {

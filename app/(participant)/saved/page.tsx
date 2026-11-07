@@ -145,8 +145,12 @@ export default function NotionSavedPage() {
                 className="bg-white rounded-xl border border-[#E6E6E6] hover:border-[#0075DE] p-4 shadow-2xs hover:shadow-xs transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-4"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-[#EBF4FC] text-[#0075DE] flex items-center justify-center font-bold text-sm flex-shrink-0">
-                    <Trophy size={18} />
+                  <div className="w-10 h-10 rounded-lg bg-[#F6F5F4] border border-[#E6E6E6] flex items-center justify-center font-bold text-sm flex-shrink-0 overflow-hidden">
+                    {comp.logo_image ? (
+                      <img src={comp.logo_image} alt="" className="w-full h-full object-contain p-1" />
+                    ) : (
+                      <Trophy size={18} className="text-[#0075DE]" />
+                    )}
                   </div>
                   <div>
                     <div className="flex items-center gap-2 mb-1">

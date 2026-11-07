@@ -91,6 +91,7 @@ export interface Competition {
   status: CompetitionStatus;
   is_featured: boolean;
   banner_image: string | null;
+  logo_image?: string | null;
   created_at: string;
 }
 

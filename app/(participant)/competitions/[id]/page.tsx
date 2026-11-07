@@ -222,7 +222,7 @@ export default function NotionCompetitionDetailPage() {
       {/* ── Notion Document Page Header ───────────────────── */}
       <div className="bg-white rounded-xl border border-[#E6E6E6] overflow-hidden shadow-2xs mb-6">
         {/* Cover Band / Poster */}
-        <div className="h-44 sm:h-56 bg-[#213183] relative overflow-hidden flex items-center justify-center">
+        <div className="h-44 sm:h-56 bg-[#201E3D] relative overflow-hidden flex items-center justify-center">
           {comp.banner_image ? (
             <img src={comp.banner_image} alt={comp.title} className="w-full h-full object-cover" />
           ) : (
@@ -231,7 +231,7 @@ export default function NotionCompetitionDetailPage() {
               <span className="text-xs">Raih Competition Portal</span>
             </div>
           )}
-          <div className="absolute top-3 right-3">
+          <div className="absolute top-3 right-3 z-10">
             <span
               className={`text-xs font-semibold px-2.5 py-1 rounded-[4px] shadow-sm ${
                 deadline.urgent ? 'bg-[#DD5B00] text-white' : 'bg-white text-[#000000] border border-[#E6E6E6]'
@@ -242,15 +242,33 @@ export default function NotionCompetitionDetailPage() {
           </div>
         </div>
 
-        {/* Page Icon & Title */}
-        <div className="p-6 sm:p-8">
-          <div className="flex items-start gap-4 mb-4">
-            <div className="w-12 h-12 -mt-12 rounded-xl bg-white border border-[#E6E6E6] flex items-center justify-center text-2xl shadow-sm flex-shrink-0">
-              🏆
+        {/* Page Icon & Title Header (clean badge overlap with z-20) */}
+        <div className="px-6 sm:px-8 pb-6 pt-0">
+          <div className="flex flex-col sm:flex-row sm:items-start gap-4 -mt-8 sm:-mt-10 mb-4">
+            <div className="relative z-20 w-16 h-16 rounded-2xl bg-white border-2 border-white shadow-md flex items-center justify-center flex-shrink-0 overflow-hidden">
+              {comp.logo_image || comp.organizer?.user?.profile_photo ? (
+                <img
+                  src={comp.logo_image || comp.organizer?.user?.profile_photo!}
+                  alt={comp.organizer?.organization_name || comp.title}
+                  className="w-full h-full object-contain p-1.5"
+                />
+              ) : (
+                <span className="text-3xl">
+                  {comp.category?.name?.toLowerCase().includes('tech') || comp.category?.name?.toLowerCase().includes('hackathon')
+                    ? '💻'
+                    : comp.category?.name?.toLowerCase().includes('bisnis') || comp.category?.name?.toLowerCase().includes('business')
+                    ? '💼'
+                    : comp.category?.name?.toLowerCase().includes('desain') || comp.category?.name?.toLowerCase().includes('ui')
+                    ? '🎨'
+                    : comp.category?.name?.toLowerCase().includes('olimpiade') || comp.category?.name?.toLowerCase().includes('sains')
+                    ? '🔬'
+                    : '🏆'}
+                </span>
+              )}
             </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-[#EBF4FC] text-[#0075DE] border border-[#B3D8FA]">
+            <div className="flex-1 pt-2 sm:pt-3">
+              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-[#EBF4FC] text-[#0075DE] border border-[#B3D8FA]">
                   {comp.category?.name ?? 'Umum'}
                 </span>
                 <span className="text-xs text-[#615D59]">
