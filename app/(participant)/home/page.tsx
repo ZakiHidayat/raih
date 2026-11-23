@@ -183,37 +183,47 @@ export default function NotionHomePage() {
       </AnimatePresence>
 
       {/* ── 1. Notion Cover / Deep Indigo Night Hero Band ──── */}
-      <section className="relative rounded-xl overflow-hidden mb-8 border border-[#E6E6E6] bg-[#213183] text-white shadow-xs">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#FFFFFF_1px,transparent_1px)] [background-size:16px_16px]" />
-        <div className="relative p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div className="max-w-xl">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 backdrop-blur-xs text-xs font-medium text-white mb-3">
-              <Sparkles size={13} className="text-[#62AEF0]" />
+      <section className="relative rounded-2xl overflow-hidden mb-6 border border-[#E6E6E6] bg-[#213183] text-white shadow-xs">
+        <div className="relative px-5 pt-4 pb-0 sm:px-7 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
+          {/* Left: Text Info */}
+          <div className="flex-1 min-w-0 z-10 text-center sm:text-left order-1">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-xs text-[11px] font-medium text-white mb-2">
+              <Sparkles size={12} className="text-[#62AEF0]" />
               <span>Pusat Kompetisi Mahasiswa & Pelajar</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-1.5">
               Raih Prestasi Terbesarmu di Sini
             </h1>
-            <p className="text-sm text-white/80 leading-relaxed">
+            <p className="text-xs text-white/80 leading-relaxed max-w-md">
               Jelajahi ratusan ajang lomba, hackathon, olimpiade riset, dan kompetisi bisnis dari kampus serta institusi terkemuka di seluruh Indonesia.
             </p>
           </div>
 
-          <div className="flex sm:flex-col gap-2 w-full sm:w-auto">
+          {/* Right on Desktop / Middle on Mobile: Quick Action Buttons */}
+          <div className="flex flex-col gap-2 w-full sm:w-auto shrink-0 z-10 order-2 sm:order-3">
             <button
               onClick={() => router.push('/competitions/create')}
-              className="flex-1 sm:flex-none px-4 py-2 text-xs font-semibold rounded-full bg-[#0075DE] hover:bg-[#005BAB] text-white shadow-sm inline-flex items-center justify-center gap-1.5 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 text-xs font-semibold rounded-full bg-[#0075DE] hover:bg-[#005BAB] text-white shadow-sm inline-flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap"
             >
-              <Trophy size={14} />
+              <Trophy size={13} />
               <span>Publikasikan Lomba</span>
             </button>
             <button
               onClick={() => router.push('/teammates')}
-              className="flex-1 sm:flex-none px-4 py-2 text-xs font-medium rounded-full bg-white/15 hover:bg-white/20 text-white inline-flex items-center justify-center gap-1.5 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 text-xs font-medium rounded-full bg-white/15 hover:bg-white/20 text-white inline-flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap"
             >
-              <Users size={14} />
+              <Users size={13} />
               <span>Cari Rekan Tim</span>
             </button>
+          </div>
+
+          {/* Mascot: Anchored completely flush to the bottom container edge */}
+          <div className="w-full sm:w-auto shrink-0 z-0 flex items-end justify-center self-end order-3 sm:order-2 sm:-mb-5 leading-none mt-2 sm:mt-0">
+            <img
+              src="/mascot/Raihie-Dipuncak-batu.png"
+              alt="Raihie di Puncak Prestasi"
+              className="h-32 sm:h-36 md:h-40 lg:h-44 w-auto object-contain object-bottom drop-shadow-md block align-bottom"
+            />
           </div>
         </div>
       </section>
@@ -556,7 +566,11 @@ export default function NotionHomePage() {
         </div>
       ) : filteredCompetitions.length === 0 ? (
         <div className="p-12 text-center rounded-lg bg-white border border-[#E6E6E6] my-6">
-          <FileText size={32} className="mx-auto text-[#615D59] mb-3" />
+          <img
+            src="/mascot/Raihie-Mencari-Lomba.png"
+            alt="Raihie mencari lomba"
+            className="w-28 h-28 object-contain mx-auto mb-3"
+          />
           <h3 className="text-sm font-semibold text-[#000000]">Tidak ada kompetisi ditemukan</h3>
           <p className="text-xs text-[#615D59] mt-1">Coba sesuaikan kata kunci pencarian atau ubah filter kategori.</p>
           <button

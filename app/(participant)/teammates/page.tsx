@@ -195,7 +195,11 @@ export default function NotionTeammatesPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="p-12 text-center rounded-lg bg-white border border-[#E6E6E6]">
-          <span className="text-4xl block mb-2">🔍</span>
+          <img
+            src="/mascot/Raihie-Semangat.png"
+            alt="Raihie Semangat"
+            className="w-24 h-24 object-contain mx-auto mb-2"
+          />
           <p className="text-sm font-semibold text-[#000000]">Tidak ada peserta yang cocok</p>
           <p className="text-xs text-[#615D59] mt-1">Coba sesuaikan kata kunci pencarian atau bersihkan filter.</p>
         </div>

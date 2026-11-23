@@ -591,6 +591,23 @@ export default function ParticipantProfilePage() {
                   </div>
                 </div>
 
+                {/* Mascot Encouragement Banner */}
+                <div className="flex items-center gap-3.5 p-3 rounded-lg bg-[#F6F5F4] border border-[#EAEAEF]">
+                  <img
+                    src="/mascot/Raihie-Meraih-Prestasi.png"
+                    alt="Raihie Meraih Prestasi"
+                    className="w-16 h-16 sm:w-20 sm:h-20 object-contain shrink-0"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-bold text-[#000000]">
+                      {level >= 5 ? 'Talenta Unggulan Berprestasi! 🏆' : 'Terus Berkompetisi & Raih Prestasi! 🌟'}
+                    </p>
+                    <p className="text-[11px] text-[#615D59] mt-0.5 leading-snug">
+                      Kamu berada di Level {level} dengan total {xp} XP. Selesaikan kompetisi aktif dan kumpulkan sertifikat untuk terus naik level!
+                    </p>
+                  </div>
+                </div>
+
                 {/* XP History Snapshot */}
                 {xpHistory.length > 0 && (
                   <div className="pt-3 border-t border-[#EAEAEF] space-y-2">
@@ -752,88 +769,114 @@ export default function ParticipantProfilePage() {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {certificates.map((cert) => {
-                const comp = competitionsMap[cert.competition_id];
-                const compTitle = comp?.title || `Kompetisi Nasional #${cert.competition_id}`;
+            {certificates.length === 0 ? (
+              <div className="p-10 rounded-xl bg-white border border-[#EAEAEF] text-center shadow-xs">
+                <img
+                  src="/mascot/Raihie-Meraih-Prestasi.png"
+                  alt="Raihie Meraih Prestasi"
+                  className="w-24 h-24 object-contain mx-auto mb-2"
+                />
+                <h3 className="text-sm font-bold text-[#000000]">Belum ada sertifikat digital</h3>
+                <p className="text-xs text-[#615D59] mt-1">Ikuti dan selesaikan kompetisi di Raih untuk mengumpulkan sertifikat digital resmi.</p>
+                <Link
+                  href="/home"
+                  className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#0075DE] text-white text-xs font-semibold shadow-xs"
+                >
+                  <span>Cari Kompetisi Sekarang</span>
+                </Link>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {certificates.map((cert) => {
+                  const comp = competitionsMap[cert.competition_id];
+                  const compTitle = comp?.title || `Kompetisi Nasional #${cert.competition_id}`;
 
-                return (
-                  <div
-                    key={cert.id}
-                    className="p-5 rounded-xl border border-[#EAEAEF] bg-white shadow-xs hover:border-[#0075DE] transition-all flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#F0FDF4] text-[#166534] border border-[#BBF7D0] inline-flex items-center gap-1">
-                          <CheckCircle2 size={13} className="text-[#1AAE39]" />
-                          <span>Kredensial Terverifikasi</span>
-                        </span>
-                        <span className="text-xs text-[#615D59]">
-                          ID: RAIH-{cert.id}-2025
-                        </span>
+                  return (
+                    <div
+                      key={cert.id}
+                      className="p-5 rounded-xl border border-[#EAEAEF] bg-white shadow-xs hover:border-[#0075DE] transition-all flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-3">
+                          <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#F0FDF4] text-[#166534] border border-[#BBF7D0] inline-flex items-center gap-1.5">
+                            <CheckCircle2 size={13} className="text-[#1AAE39]" />
+                            <span>Kredensial Terverifikasi</span>
+                          </span>
+                          <span className="text-xs text-[#615D59]">
+                            ID: RAIH-{cert.id}-2025
+                          </span>
+                        </div>
+
+                        <h3 className="text-base font-bold text-[#000000] mb-2 leading-snug">
+                          {compTitle}
+                        </h3>
+
+                        <p className="text-xs text-[#615D59] mb-4">
+                          Diterbitkan resmi untuk <strong>{user.name}</strong> atas partisipasi dan pencapaian kompetisi.
+                        </p>
                       </div>
 
-                      <h3 className="text-base font-bold text-[#000000] mb-2 leading-snug">
-                        {compTitle}
-                      </h3>
+                      <div className="pt-3 border-t border-[#EAEAEF] flex items-center justify-between gap-3">
+                        <span className="text-[11px] text-[#A39E98]">
+                          Terbit: {new Date(cert.issued_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                        </span>
 
-                      <p className="text-xs text-[#615D59] mb-4">
-                        Diterbitkan resmi untuk <strong>{user.name}</strong> atas partisipasi dan pencapaian kompetisi.
-                      </p>
+                        <button
+                          onClick={() => setSelectedCert({ cert, compTitle })}
+                          className="px-4 py-2 rounded-full bg-[#0075DE] hover:bg-[#005BAB] text-white text-xs font-semibold inline-flex items-center gap-1.5 transition-colors shadow-xs"
+                        >
+                          <ExternalLink size={13} />
+                          <span>Lihat Sertifikat</span>
+                        </button>
+                      </div>
                     </div>
-
-                    <div className="pt-3 border-t border-[#EAEAEF] flex items-center justify-between gap-3">
-                      <span className="text-[11px] text-[#A39E98]">
-                        Terbit: {new Date(cert.issued_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
-                      </span>
-
-                      <button
-                        onClick={() => setSelectedCert({ cert, compTitle })}
-                        className="px-4 py-2 rounded-full bg-[#0075DE] hover:bg-[#005BAB] text-white text-xs font-semibold inline-flex items-center gap-1.5 transition-colors shadow-xs"
-                      >
-                        <ExternalLink size={13} />
-                        <span>Lihat Sertifikat</span>
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         )}
 
         {/* ── Tab: Riwayat Gamifikasi & XP ──────────────────── */}
         {activeTab === 'xp' && (
           <div className="space-y-4">
-            <div className="p-5 rounded-xl bg-white border border-[#EAEAEF] shadow-xs space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-sm font-bold text-[#000000]">Sistem Gamifikasi & Prestasi XP Raih</h2>
-                  <p className="text-xs text-[#615D59] mt-0.5">
-                    Tingkat keaktifanmu diukur berdasarkan partisipasi, pendaftaran tim, dan kemenangan kompetisi.
-                  </p>
+            <div className="p-5 rounded-xl bg-white border border-[#EAEAEF] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-5">
+              <div className="space-y-3 flex-1 w-full">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-sm font-bold text-[#000000]">Sistem Gamifikasi & Prestasi XP Raih</h2>
+                    <p className="text-xs text-[#615D59] mt-0.5">
+                      Tingkat keaktifanmu diukur berdasarkan partisipasi, pendaftaran tim, dan kemenangan kompetisi.
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-2xl font-black text-[#000000]">{xp} XP</span>
+                    <span className="text-xs text-[#DD5B00] font-bold block">Level {level} Competitor</span>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <span className="text-2xl font-black text-[#000000]">{xp} XP</span>
-                  <span className="text-xs text-[#DD5B00] font-bold block">Level {level} Competitor</span>
+
+                {/* Progress */}
+                <div className="space-y-1.5 pt-2">
+                  <Progress
+                    value={progressPercent}
+                    size="md"
+                    classNames={{
+                      track: 'bg-[#F0F0F5] border border-[#EAEAEF]',
+                      indicator: 'bg-[#0075DE]',
+                    }}
+                  />
+                  <div className="flex items-center justify-between text-xs text-[#615D59]">
+                    <span>{xpInCurrentLevel} XP</span>
+                    <span>{xpForNextLevel} XP Target</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Progress */}
-              <div className="space-y-1.5 pt-2">
-                <Progress
-                  value={progressPercent}
-                  size="md"
-                  classNames={{
-                    track: 'bg-[#F0F0F5] border border-[#EAEAEF]',
-                    indicator: 'bg-[#0075DE]',
-                  }}
-                />
-                <div className="flex items-center justify-between text-xs text-[#615D59]">
-                  <span>{xpInCurrentLevel} XP</span>
-                  <span>{xpForNextLevel} XP Target</span>
-                </div>
-              </div>
+              <img
+                src="/mascot/Raihie-Dipuncak-batu.png"
+                alt="Raihie di Puncak Prestasi"
+                className="h-28 sm:h-32 w-auto object-contain shrink-0"
+              />
             </div>
 
             {/* Riwayat Transaksi Lengkap */}

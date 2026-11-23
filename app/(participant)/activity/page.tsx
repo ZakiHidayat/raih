@@ -105,6 +105,23 @@ export default function NotionActivityPage() {
             </p>
           </div>
         </div>
+
+        {/* Raihie Schedule Helper Callout */}
+        <div className="mt-4 p-4 rounded-xl bg-white border border-[#E6E6E6] flex items-center justify-between gap-4 shadow-2xs">
+          <div className="space-y-1">
+            <span className="text-[11px] font-bold text-[#0075DE] uppercase tracking-wider flex items-center gap-1.5">
+              <span>📅</span> Kalender Kompetisi & Tenggat Waktu
+            </span>
+            <p className="text-xs text-[#31302E] leading-relaxed">
+              Raihie siap mengingatkanmu di setiap tahapan lomba (H-3 dan H-1 deadline). Pastikan berkas pendaftaranmu siap tepat waktu!
+            </p>
+          </div>
+          <img
+            src="/mascot/Raihie-Melihat-Calendar.png"
+            alt="Raihie melihat kalender"
+            className="w-16 h-16 sm:w-20 sm:h-20 object-contain shrink-0"
+          />
+        </div>
       </div>
 
       {/* ── Notion Filter Tabs ────────────────────────────── */}
@@ -166,7 +183,11 @@ export default function NotionActivityPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="p-12 text-center rounded-xl bg-white border border-[#E6E6E6]">
-          <Ticket size={32} className="mx-auto text-[#615D59] mb-2" />
+          <img
+            src="/mascot/Raihie-Melihat-Calendar.png"
+            alt="Raihie melihat kalender"
+            className="w-28 h-28 object-contain mx-auto mb-2"
+          />
           <p className="text-sm font-semibold text-[#000000]">Belum ada aktivitas pendaftaran</p>
           <p className="text-xs text-[#615D59] mt-1">Daftar lomba sekarang untuk mulai mengumpulkan portofolio prestasimu.</p>
           <button

@@ -249,6 +249,37 @@ export default function NotionSearchPage() {
         </div>
       )}
 
+      {/* ── Initial Discovery Prompt when not searched yet ──── */}
+      {!hasSearched && (
+        <div className="bg-white rounded-xl border border-[#E6E6E6] p-6 shadow-2xs mb-6 flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
+          <img
+            src="/mascot/Raihie-Mencari-Lomba.png"
+            alt="Raihie mencari lomba"
+            className="w-24 h-24 sm:w-28 sm:h-28 object-contain shrink-0"
+          />
+          <div>
+            <h3 className="text-sm sm:text-base font-bold text-[#000000] mb-1">
+              Raihie siap membantumu mencari lomba terbaik!
+            </h3>
+            <p className="text-xs text-[#615D59] leading-relaxed mb-3">
+              Ketik kata kunci kompetisi atau pilih filter kategori di atas untuk menemukan ajang bergengsi yang cocok dengan bakatmu.
+            </p>
+            <div className="flex flex-wrap gap-1.5 justify-center sm:justify-start text-xs">
+              <span className="text-[#615D59] text-[11px] font-semibold mr-1 self-center">Rekomendasi:</span>
+              {['Hackathon AI', 'Karya Tulis Ilmiah', 'UI/UX Design', 'Debat Nasional', 'Bisnis Plan'].map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => { setQuery(tag); doSearch(tag); }}
+                  className="px-2.5 py-0.5 rounded-full bg-[#F6F5F4] hover:bg-[#EAE8E4] border border-[#E6E6E6] text-[11px] text-[#31302E] transition-colors"
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ── Search Results List ───────────────────────────── */}
       {isLoading ? (
         <div className="space-y-3">
@@ -261,7 +292,11 @@ export default function NotionSearchPage() {
         </div>
       ) : hasSearched && results.length === 0 ? (
         <div className="p-12 text-center rounded-xl bg-white border border-[#E6E6E6]">
-          <Search size={32} className="mx-auto text-[#615D59] mb-2" />
+          <img
+            src="/mascot/Raihie-Mencari-Lomba.png"
+            alt="Raihie tidak menemukan hasil"
+            className="w-28 h-28 object-contain mx-auto mb-2"
+          />
           <p className="text-sm font-semibold text-[#000000]">Tidak ada hasil untuk pencarian ini</p>
           <p className="text-xs text-[#615D59] mt-1">Coba gunakan kata kunci yang lebih umum atau kurangi filter.</p>
         </div>

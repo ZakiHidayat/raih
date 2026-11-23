@@ -171,9 +171,11 @@ export default function NotionLoginPage() {
       <main className="max-w-lg mx-auto w-full my-8 bg-white rounded-xl border border-[#E6E6E6] p-6 sm:p-8 shadow-xs">
         {/* Card Header */}
         <div className="mb-6 text-center">
-          <div className="w-12 h-12 rounded-lg bg-[#F6F5F4] border border-[#E6E6E6] flex items-center justify-center text-2xl mx-auto mb-3 shadow-2xs">
-            {currentPortal.icon}
-          </div>
+          <img
+            src="/mascot/Raihie-Semangat.png"
+            alt="Raihie Semangat"
+            className="w-20 h-20 object-contain mx-auto mb-2 drop-shadow-2xs"
+          />
           <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#000000]">
             Portal Masuk Raih
           </h1>

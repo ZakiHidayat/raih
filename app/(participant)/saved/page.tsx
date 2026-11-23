@@ -122,7 +122,11 @@ export default function NotionSavedPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="p-12 text-center rounded-xl bg-white border border-[#E6E6E6]">
-          <Heart size={32} className="mx-auto text-[#615D59] mb-2" />
+          <img
+            src="/mascot/Raihie-Meraih-Prestasi.png"
+            alt="Raihie meraih prestasi"
+            className="w-28 h-28 object-contain mx-auto mb-2"
+          />
           <p className="text-sm font-semibold text-[#000000]">Belum ada kompetisi yang disimpan</p>
           <p className="text-xs text-[#615D59] mt-1">Simpan lomba dari halaman Eksplor untuk dipantau di sini.</p>
           <button
