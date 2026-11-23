@@ -162,8 +162,9 @@ export default function NotionAdminLayout({ children }: { children: React.ReactN
             </button>
 
             <div className="flex items-center gap-1.5 text-xs text-[#615D59]">
-              <span className="hover:text-[#000000] cursor-pointer" onClick={() => router.push('/admin')}>
-                Raih
+              <span className="hover:text-[#000000] cursor-pointer flex items-center gap-1.5" onClick={() => router.push('/admin')}>
+                <img src="/raih-icon.svg" alt="Raih" className="w-3.5 h-3.5 object-contain" />
+                <span>Raih</span>
               </span>
               <span>/</span>
               <span className="text-[#000000] font-semibold truncate">

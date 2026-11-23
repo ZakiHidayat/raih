@@ -77,9 +77,10 @@ export default function NotionOrganizerLayout({ children }: { children: React.Re
         <div className="h-12 border-b border-[#E6E6E6] px-3 flex items-center justify-between">
           {isSidebarOpen ? (
             <div className="flex items-center gap-2 min-w-0">
-              <div className="w-5 h-5 rounded-[4px] bg-[#0075DE] text-white flex items-center justify-center font-bold text-xs shadow-xs">
-                R
-              </div>
+              <Link href="/dashboard" className="shrink-0 flex items-center">
+                <img src="/raih-logo.svg" alt="Raih" className="h-5 w-auto object-contain" />
+              </Link>
+              <span className="text-[#C5C0B8]">|</span>
               <span className="font-semibold text-xs text-[#000000] truncate">
                 {orgProfile?.organization_name ?? 'Organizer Hub'}
               </span>
@@ -88,9 +89,9 @@ export default function NotionOrganizerLayout({ children }: { children: React.Re
               </span>
             </div>
           ) : (
-            <div className="w-5 h-5 mx-auto rounded-[4px] bg-[#0075DE] text-white flex items-center justify-center font-bold text-xs">
-              R
-            </div>
+            <Link href="/dashboard" className="flex items-center justify-center mx-auto" title="Raih Organizer">
+              <img src="/raih-icon.svg" alt="Raih" className="w-5 h-5 object-contain" />
+            </Link>
           )}
 
           <button
@@ -202,8 +203,9 @@ export default function NotionOrganizerLayout({ children }: { children: React.Re
         {/* Top Notion Breadcrumb Bar */}
         <header className="h-12 bg-white/90 backdrop-blur-xs border-b border-[#E6E6E6] sticky top-0 z-30 px-4 flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-xs text-[#615D59] min-w-0">
-            <span className="hover:text-[#000000] cursor-pointer" onClick={() => router.push('/dashboard')}>
-              Raih
+            <span className="hover:text-[#000000] cursor-pointer flex items-center gap-1.5" onClick={() => router.push('/dashboard')}>
+              <img src="/raih-icon.svg" alt="Raih" className="w-3.5 h-3.5 object-contain" />
+              <span>Raih</span>
             </span>
             <span>/</span>
             <span>Pengelola</span>
@@ -254,7 +256,10 @@ export default function NotionOrganizerLayout({ children }: { children: React.Re
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between pb-3 border-b border-[#E6E6E6]">
-                <span className="font-semibold text-xs">Panel Pengelola</span>
+                <Link href="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
+                  <img src="/raih-logo.svg" alt="Raih" className="h-5 w-auto object-contain" />
+                  <span className="text-xs text-[#615D59]">Pengelola</span>
+                </Link>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-xs px-2 py-1 rounded bg-[#E6E6E6]"

@@ -167,18 +167,13 @@ export default function NotionParticipantLayout({ children }: { children: React.
         {/* Workspace Switcher Header */}
         <div className="h-12 border-b border-[#E6E6E6] px-3 flex items-center justify-between">
           {isSidebarOpen ? (
-            <div className="flex items-center gap-2 min-w-0">
-              <div className="w-5 h-5 rounded-[4px] bg-[#0075DE] text-white flex items-center justify-center font-bold text-xs shadow-xs">
-                R
-              </div>
-              <span className="font-semibold text-xs text-[#000000] truncate">
-                Raih
-              </span>
-            </div>
+            <Link href="/home" className="flex items-center gap-2 min-w-0">
+              <img src="/raih-logo.svg" alt="Raih" className="h-6 w-auto object-contain" />
+            </Link>
           ) : (
-            <div className="w-5 h-5 mx-auto rounded-[4px] bg-[#0075DE] text-white flex items-center justify-center font-bold text-xs">
-              R
-            </div>
+            <Link href="/home" className="flex items-center justify-center mx-auto" title="Raih">
+              <img src="/raih-icon.svg" alt="Raih" className="w-5 h-5 object-contain" />
+            </Link>
           )}
 
           <button
@@ -288,8 +283,9 @@ export default function NotionParticipantLayout({ children }: { children: React.
           <div className="flex items-center gap-2 min-w-0">
             {/* Notion Breadcrumbs */}
             <div className="flex items-center gap-1.5 text-xs text-[#615D59]">
-              <span className="hover:text-[#000000] cursor-pointer" onClick={() => router.push('/home')}>
-                Raih
+              <span className="hover:text-[#000000] cursor-pointer flex items-center gap-1.5" onClick={() => router.push('/home')}>
+                <img src="/raih-icon.svg" alt="Raih" className="w-3.5 h-3.5 object-contain" />
+                <span>Raih</span>
               </span>
               <span>/</span>
               <span className="text-[#000000] font-semibold truncate">
@@ -478,12 +474,9 @@ export default function NotionParticipantLayout({ children }: { children: React.
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between pb-3 border-b border-[#E6E6E6]">
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-[4px] bg-[#0075DE] text-white flex items-center justify-center font-bold text-xs">
-                    R
-                  </div>
-                  <span className="font-semibold text-xs">Raih</span>
-                </div>
+                <Link href="/home" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
+                  <img src="/raih-logo.svg" alt="Raih" className="h-6 w-auto object-contain" />
+                </Link>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-xs px-2 py-1 rounded bg-[#E6E6E6]"

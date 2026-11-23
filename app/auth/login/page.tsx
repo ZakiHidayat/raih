@@ -156,10 +156,7 @@ export default function NotionLoginPage() {
       {/* Top Bar */}
       <header className="max-w-4xl mx-auto w-full flex items-center justify-between py-3 border-b border-[#E6E6E6]">
         <Link href="/home" className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-[4px] bg-[#0075DE] text-white flex items-center justify-center font-bold text-xs shadow-xs">
-            R
-          </div>
-          <span className="font-semibold text-xs text-[#000000]">Raih</span>
+          <img src="/raih-logo.svg" alt="Raih" className="h-7 w-auto object-contain" />
         </Link>
 
         <Link

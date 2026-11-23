@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   description: 'Temukan, daftar, dan kelola partisipasi lomba/kompetisi akademik dan non-akademik terlengkap di Indonesia. Untuk pelajar, mahasiswa, dan masyarakat umum.',
   keywords: ['lomba', 'kompetisi', 'mahasiswa', 'pelajar', 'hackathon', 'olimpiade', 'Indonesia'],
   authors: [{ name: 'Raih Team' }],
+  icons: {
+    icon: '/raih-icon.svg',
+    shortcut: '/raih-icon.svg',
+    apple: '/raih-icon.svg',
+  },
   openGraph: {
     title: 'Raih — Platform Pencarian & Manajemen Kompetisi',
     description: 'Temukan ribuan lomba & kompetisi terpercaya di Indonesia',
